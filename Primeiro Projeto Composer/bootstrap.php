@@ -2,11 +2,31 @@
 
 require __DIR__."/vendor/autoload.php";
 
-$method = $_SERVER['REQUEST_METHOD'];
-$path = $_SERVER['PATH_INFO'];
+$metodo = $_SERVER['REQUEST_METHOD'];
+$caminho = $_SERVER['PATH_INFO'] ?? '/';
 
-$r = new Php\Primeiroprojeto\Router;
+$r = new Php\Primeiroprojeto\Router($metodo, $caminho);
 
-$r->get('/olamundo', function () {
-    return "Olá Mundo!";
-});
+#ROTAS
+
+$r->get('/olamundo', function (){
+    return "Olá mundo!";
+} );
+
+$r->get('/olapessoa/{nome}', function($params){
+    return 'Olá '.$params[1];
+} );
+
+#ROTAS
+
+$resultado = $r->handler();
+
+if(!$resultado){
+    http_response_code(404);
+    echo "Página não encontrada!";
+    die();
+}
+
+echo $resultado($r->getParams());
+
+
