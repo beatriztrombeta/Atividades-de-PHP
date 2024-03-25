@@ -1,0 +1,15 @@
+{
+    "name": "beatriz/exercicio8",
+    "autoload": {
+        "psr-4": {
+            "Beatriz\\Exercicio8\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "beatriztrombeta",
+            "email": "beatriztrombeta@gmail.com"
+        }
+    ],
+    "require": {}
+}
