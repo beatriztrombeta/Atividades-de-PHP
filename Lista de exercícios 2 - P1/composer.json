@@ -1,8 +1,9 @@
 {
-    "name": "beatriz/exercicio8",
+    "name": "php/listadeexercicios2",
+    "description": "P1 de Eletivas WEB",
     "autoload": {
         "psr-4": {
-            "Beatriz\\Exercicio8\\": "src/"
+            "Php\\Listadeexercicios2\\": "src/"
         }
     },
     "authors": [

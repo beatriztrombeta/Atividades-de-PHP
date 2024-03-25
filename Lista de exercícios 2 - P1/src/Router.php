@@ -1,6 +1,6 @@
 <?php
 
-namespace Php\Exercicio8;
+namespace Php\Listadeexercicios2;
 
 class Router
 {
