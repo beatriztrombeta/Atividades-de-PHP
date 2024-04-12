@@ -1,0 +1,14 @@
+{
+    "name": "php/projetop1",
+    "autoload": {
+        "psr-4": {
+            "Php\\Projetop1\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Betriz Trombeta"
+        }
+    ],
+    "require": {}
+}
