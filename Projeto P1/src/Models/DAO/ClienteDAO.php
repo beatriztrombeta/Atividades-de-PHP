@@ -43,6 +43,21 @@ class ClienteDAO
         }
     }
 
+    public function buscarPorId($id)
+    {
+        try {
+            $sql = "SELECT * FROM Gênero WHERE id = :id";
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            $genero = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $genero; // Retorna o gênero encontrado ou null se não encontrado
+        } catch (PDOException $e) {
+            echo "Erro ao buscar gênero por ID: " . $e->getMessage();
+            return null;
+        }
+    }
+
     public function atualizar(Cliente $cliente)
     {
         try {

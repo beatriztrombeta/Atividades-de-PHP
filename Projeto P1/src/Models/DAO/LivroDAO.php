@@ -37,7 +37,7 @@ class LivroDAO
             $sql = "SELECT * FROM Livro";
             $stmt = $this->conexao->query($sql);
             $livros = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            return $livros; // Retorna todos os livros encontrados
+            return $livros;
         } catch (PDOException $e) {
             echo "Erro ao listar todos os livros: " . $e->getMessage();
             return [];
