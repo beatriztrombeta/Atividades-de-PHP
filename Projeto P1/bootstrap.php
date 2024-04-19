@@ -15,7 +15,7 @@ $router->get('/livros', 'Php\Projetop1\Controllers\LivrosController@livros');
 $router->get('/emprestimos', 'Php\Projetop1\Controllers\EmprestimosController@emprestimos');
 
 // Rotas POST para Clientes
-$router->post('/cliente/inserir', 'Php\Projetop1\Controllers\ClientesController@inserir');
+$router->post('/clientes/inserir', 'Php\Projetop1\Controllers\ClientesController@inserir');
 $router->post('/clientes/consultar', 'Php\Projetop1\Controllers\ClientesController@consultar');
 $router->post('/clientes/atualizar', 'Php\Projetop1\Controllers\ClientesController@atualizar');
 $router->post('/clientes/deletar', 'Php\Projetop1\Controllers\ClientesController@deletar');

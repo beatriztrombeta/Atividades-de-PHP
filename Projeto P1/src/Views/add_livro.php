@@ -1,3 +1,13 @@
+<?php
+
+use Php\Projetop1\Models\DAO\LivroDAO;
+use Php\Projetop1\Models\DAO\Conexao;
+
+$conexao = new Conexao();
+$livroDAO = new LivroDAO($conexao);
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -9,42 +19,53 @@
 </head>
 
 <body class="container">
-    <h3>Hello, world!</h3>
-
-    <?php
-    if (isset($_GET['inserir'])) {
-    ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Registro inserido com sucesso!
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <h3>Inserir Livro</h3>
+    <form action="/livros/inserir" method="POST">
+        <div class="row">
+            <div class="col-7">
+                <label for="titulo" class="form-label">Informe o título:</label>
+                <input type="text" id="titulo" name="titulo" class="form-control" required />
+            </div>
+            <div class="col-5">
+                <label for="autor" class="form-label">Informe o autor:</label>
+                <input type="text" id="autor" name="autor" class="form-control" required />
+            </div>
+            <div class="col-5">
+                <label for="id_genero" class="form-label">Informe o id do gênero:</label>
+                <input type="number" id="id_genero" name="id_genero" class="form-control" required />
+            </div>
         </div>
-    <?php } ?>
-
-    <a href="inserir" class="btn btn-info">Inserir novo Livro</a>
+        <br>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Salvar Dados</button>
+            </div>
+        </div>
+    </form>
+    <br>
     <table class="table table-info table-striped table-hover">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Título</th>
                 <th>Autor</th>
+                <th>ID do gênero</th>
             </tr>
         </thead>
         <tbody>
             <?php
-            require_once __DIR__ . '/../Controllers/LivrosController.php';
-            $livrosController = new Php\Projetop1\Controllers\LivrosController();
-
-            $dados = $livrosController->listarTodos([]);
-            echo $dados;
-
-            if (is_array($dados) && !empty($dados)) {
-                foreach ($dados as $livro) {
+            $livros = $livroDAO->listarTodos();
+            if (!empty($livros)) {
+                foreach ($livros as $livro) {
                     echo "<tr>
-                <td>{$livro['titulo']}</td>
-                <td>{$livro['autor']}</td>
-            </tr>";
+                            <td>{$livro['id']}</td>
+                            <td>{$livro['titulo']}</td>
+                            <td>{$livro['autor']}</td>
+                            <td>{$livro['id_genero']}</td>
+                        </tr>";
                 }
             } else {
-                echo "<tr><td colspan='2'>Tabela vazia!</td></tr>";
+                echo "<tr><td colspan='3'>Tabela vazia!</td></tr>";
             }
             ?>
         </tbody>

@@ -17,24 +17,22 @@ class LivroDAO
 
     public function inserir(Livro $livro)
     {
-        try {
+        try{
             $sql = "INSERT INTO Livro (titulo, autor, id_genero) VALUES (:titulo, :autor, :id_genero)";
             $stmt = $this->conexao->prepare($sql);
             $stmt->bindValue(':titulo', $livro->getTitulo());
             $stmt->bindValue(':autor', $livro->getAutor());
             $stmt->bindValue(':id_genero', $livro->getIdGenero());
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo "Erro ao inserir livro: " . $e->getMessage();
-            return false;
+            return $stmt->execute();
+        } catch(PDOException $e){
+            throw new PDOException("Erro ao inserir livro: " . $e->getMessage());
         }
     }
 
     public function listarTodos()
     {
         try {
-            $sql = "SELECT * FROM Livro";
+            $sql = "SELECT * FROM Livro ORDER BY id";
             $stmt = $this->conexao->query($sql);
             $livros = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $livros;
@@ -44,33 +42,4 @@ class LivroDAO
         }
     }
 
-    public function atualizar(Livro $livro)
-    {
-        try {
-            $sql = "UPDATE Livro SET autor = :autor, id_genero = :id_genero WHERE titulo = :titulo";
-            $stmt = $this->conexao->prepare($sql);
-            $stmt->bindValue(':autor', $livro->getAutor());
-            $stmt->bindValue(':id_genero', $livro->getIdGenero());
-            $stmt->bindValue(':titulo', $livro->getTitulo());
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo "Erro ao atualizar livro: " . $e->getMessage();
-            return false;
-        }
-    }
-
-    public function deletarPorTitulo($titulo)
-    {
-        try {
-            $sql = "DELETE FROM Livro WHERE titulo = :titulo";
-            $stmt = $this->conexao->prepare($sql);
-            $stmt->bindValue(':titulo', $titulo);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo "Erro ao deletar livro por título: " . $e->getMessage();
-            return false;
-        }
-    }
 }

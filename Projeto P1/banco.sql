@@ -79,6 +79,20 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Empréstimos` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- Inserindo um gênero
+INSERT INTO `mydb`.`Gênero` (`nome_genero`, `descricao`) 
+VALUES ('Ficção Científica', 'Livros que exploram cenários futuristas e avanços científicos.');
+
+-- Obtendo o ID do gênero inserido
+SET @id_genero := LAST_INSERT_ID();
+
+-- Inserindo dois livros associados ao gênero inserido
+INSERT INTO `mydb`.`Livro` (`titulo`, `autor`, `id_genero`)
+VALUES ('Neuromancer', 'William Gibson', @id_genero);
+
+INSERT INTO `mydb`.`Livro` (`titulo`, `autor`, `id_genero`)
+VALUES ('Fundação', 'Isaac Asimov', @id_genero);
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

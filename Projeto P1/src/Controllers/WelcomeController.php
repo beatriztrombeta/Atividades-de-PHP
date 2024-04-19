@@ -4,6 +4,6 @@ namespace Php\Projetop1\Controllers;
 
 class WelcomeController {
     public function bemVindo($params){
-        require_once(__DIR__ . "/../Views/bem_vindo.php");
+        return "Bem-vindo(a)! Esta é uma página de teste.";
     }
 }
