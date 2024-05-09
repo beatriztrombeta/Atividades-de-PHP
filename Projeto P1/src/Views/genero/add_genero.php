@@ -38,12 +38,14 @@ $generoDAO = new GeneroDAO($conexao);
       </div>
   </form>
   <br>
-  <table class="table table-info table-striped table-hover">
+  <table class="table table-info table-striped table-hover" id="tabela">
     <thead>
       <tr>
         <th>ID</th>
         <th>Nome do gênero</th>
         <th>Descrição</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -55,16 +57,34 @@ $generoDAO = new GeneroDAO($conexao);
                   <td>{$genero['id']}</td>
                   <td>{$genero['nome_genero']}</td>
                   <td>{$genero['descricao']}</td>
+                  <td>
+                        <a href='/generos/alterar?id={$genero['id']}' class='btn btn-warning'>Alterar</a>
+                    </td>
+                    <td>
+                        <a href='/generos/excluir?id={$genero['id']}' class='btn btn-danger'>Excluir</a>
+                    </td>
                 </tr>";
         }
       } else {
-        echo "<tr><td colspan='3'>Tabela vazia!</td></tr>";
+        echo "<tr><td colspan='5'>Tabela vazia!</td></tr>";
       }
       ?>
     </tbody>
   </table>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var table = new DataTable('#tabela', {
+        language: {
+          url: 'https://cdn.datatables.net/plug-ins/2.0.6/i18n/pt-BR.json',
+        },
+      });
+    });
+  </script>
 </body>
 
 </html>

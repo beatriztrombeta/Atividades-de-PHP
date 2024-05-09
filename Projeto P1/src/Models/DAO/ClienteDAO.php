@@ -43,4 +43,49 @@ class ClienteDAO
         }
     }
 
+    public function listarApenasUm($id)
+    {
+        try {
+            $sql = "SELECT * FROM Cliente WHERE id = :id";
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $cliente;
+        } catch (PDOException $e) {
+            echo "Erro ao listar cliente: " . $e->getMessage();
+            return null;
+        }
+    }
+
+
+    public function atualizar(Cliente $cliente)
+    {
+        try {
+            $sql = "UPDATE Cliente SET nome = :nome, email = :email WHERE id = :id";
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':nome', $cliente->getNome());
+            $stmt->bindValue(':email', $cliente->getEmail());
+            $stmt->bindValue(':id', $cliente->getId());
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erro ao atualizar cliente: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function deletar($id)
+    {
+        try {
+            $sql = "DELETE FROM Cliente WHERE id = :id";
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erro ao deletar cliente: " . $e->getMessage();
+            return false;
+        }
+    }
 }

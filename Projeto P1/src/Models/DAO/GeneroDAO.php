@@ -42,4 +42,49 @@ class GeneroDAO
             return [];
         }
     }
+
+    public function listarApenasUm($id)
+    {
+        try {
+            $sql = "SELECT * FROM Gênero WHERE id = :id";
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            $genero = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $genero;
+        } catch (PDOException $e) {
+            echo "Erro ao listar gênero: " . $e->getMessage();
+            return null;
+        }
+    }
+
+    public function atualizar(Genero $genero)
+    {
+        try {
+            $sql = "UPDATE Gênero SET nome_genero = :nome_genero, descricao = :descricao WHERE id = :id";
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':nome_genero', $genero->getNome());
+            $stmt->bindValue(':descricao', $genero->getDescricao());
+            $stmt->bindValue(':id', $genero->getId());
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erro ao atualizar genero: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function deletar($id)
+    {
+        try {
+            $sql = "DELETE FROM Gênero WHERE id = :id";
+            $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erro ao deletar genero: " . $e->getMessage();
+            return false;
+        }
+    }
 }

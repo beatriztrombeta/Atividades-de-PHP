@@ -56,6 +56,8 @@ $emprestimoDAO = new EmprestimoDAO($conexao);
           <th>Data de devolução</th>
           <th>ID do livro</th>
           <th>ID do cliente</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -69,10 +71,16 @@ $emprestimoDAO = new EmprestimoDAO($conexao);
                       <td>{$emprestimo['data_devolucao']}</td>
                       <td>{$emprestimo['id_livro']}</td>
                       <td>{$emprestimo['id_cliente']}</td>
+                      <td>
+                        <a href='/emprestimos/alterar?id={$emprestimo['id']}' class='btn btn-warning'>Alterar</a>
+                      </td>
+                      <td>
+                        <a href='/emprestimos/excluir?id={$emprestimo['id']}' class='btn btn-danger'>Excluir</a>
+                      </td>
                   </tr>";
           }
         } else {
-          echo "<tr><td colspan='3'>Tabela vazia!</td></tr>";
+          echo "<tr><td colspan='7'>Tabela vazia!</td></tr>";
         }
         ?>
       </tbody>
